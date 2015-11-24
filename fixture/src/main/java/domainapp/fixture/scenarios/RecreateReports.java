@@ -131,7 +131,11 @@ public class RecreateReports extends FixtureScript {
 			final ReportsCreate fs = new ReportsCreate().setName(NAMES2.get(i));
 			ec.executeChild(this, fs.getName(), fs);
 
-			reports.add(fs.getSimpleObject());
+			final Report rep = fs.getSimpleObject();
+			for (int j = 0; j < numberCustomers; j++){
+				rep.addProject(projects.get((i)*numberCustomers+j));
+			}
+			reports.add(rep);
 		}
 
 	}
