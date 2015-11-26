@@ -19,7 +19,7 @@ import com.cosylab.dom.simple.Project;
 @DomainService
 @DomainServiceLayout(menuOrder = "30", named="Print")
 public class Html implements ReportPrinter {
-	public Object printAsHtml(Report report){
+	public Clob printAsHtml(Report report){
 		StringBuilder sb = new StringBuilder();
 		sb.append("Header\n");
 		sb.append("<h1>"+report.getName()+"</h1>\n");

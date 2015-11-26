@@ -16,8 +16,8 @@ public class MyComponentFactoryRegistrar extends ComponentFactoryRegistrarDefaul
     @Override
     public void addComponentFactories(ComponentFactoryList componentFactories) {
         super.addComponentFactories(componentFactories);
-        //componentFactories.add(new StringAsHTMLPanelFactory());
-        //componentFactories.add(new ClobAsHTMLPanelFactory());
+        componentFactories.add(new StringAsHTMLPanelFactory());
+        componentFactories.add(new ClobAsHTMLPanelFactory());
     }	
 
 }

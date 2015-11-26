@@ -38,10 +38,12 @@ import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.services.actinvoc.ActionInvocationContext;
 import org.apache.isis.applib.services.scratchpad.Scratchpad;
 import org.apache.isis.applib.util.ObjectContracts;
+import org.apache.isis.applib.value.Clob;
 
 import com.cosylab.Html;
 import com.cosylab.dom.report.Report;
 import com.cosylab.dom.report.Reports;
+import com.cosylab.isis.RichContent;
 
 @javax.jdo.annotations.PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "simple", table = "Project")
 @javax.jdo.annotations.DatastoreIdentity(strategy = javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column = "id")
@@ -117,21 +119,22 @@ public class Project implements Comparable<Project> {
 	//}}
 	
 	// {{ Description (property)
+	// Was Clob
 	@MemberOrder(sequence = "20")
 	@Column(allowsNull = "false")
 	@PropertyLayout( multiLine = 10, typicalLength = 80)
 	@Html
-	private String description;
+	private RichContent description;
 
-	public String getDescription() {
+	public RichContent getDescription() {
 		return description;
 	}
 
-	public void setDescription(final String description) {
+	public void setDescription(final RichContent description) {
 		this.description = description;
 	}
-	public String defaultDescription(){
-		return "Your text here";
+	public RichContent defaultDescription(){
+		return new RichContent("Your text here");
 	}
 	// }}
 	

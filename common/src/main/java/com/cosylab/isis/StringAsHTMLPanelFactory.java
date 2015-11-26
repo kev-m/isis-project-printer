@@ -3,6 +3,7 @@
  */
 package com.cosylab.isis;
 
+import org.apache.isis.applib.value.Clob;
 import org.apache.isis.core.metamodel.spec.ObjectSpecification;
 import org.apache.isis.core.metamodel.spec.SpecificationLoader;
 import org.apache.isis.core.runtime.persistence.adapter.PojoAdapter;
@@ -15,6 +16,7 @@ import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 
 import com.cosylab.Html;
+import com.cosylab.ReportPrinter;
 
 /**
  * @author kevin
@@ -22,7 +24,7 @@ import com.cosylab.Html;
  */
 public class StringAsHTMLPanelFactory extends ComponentFactoryAbstract {
 	private static final long serialVersionUID = 2668941049926738913L;
-	private static final String ID_HTML = "mine";	
+	private static final String ID_HTML = "myHtml";	
 
 	public StringAsHTMLPanelFactory() {
 		super(ComponentType.SCALAR_NAME_AND_VALUE, ID_HTML);
@@ -33,11 +35,13 @@ public class StringAsHTMLPanelFactory extends ComponentFactoryAbstract {
 		if (model instanceof ScalarModel) {
 			ScalarModel mo = (ScalarModel) model;
 			ObjectSpecification os = mo.getTypeOfSpecification();
-	        ObjectSpecification locatableSpec = getSpecificationLoader().loadSpecification(Html.class);
+	        ObjectSpecification locatableSpec = getSpecificationLoader().loadSpecification(ReportPrinter.class);
 	        if (os.isOfType(locatableSpec)){
 				System.out.println(locatableSpec);
+				return ApplicationAdvice.APPLIES;
 	        }
 			
+	        /* Remove
 			Object obj = model.getObject();
 			PropertyMemento pm = ((ScalarModel) model).getPropertyMemento();
 			if (pm != null && pm.getIdentifier().equals("description")){
@@ -54,6 +58,7 @@ public class StringAsHTMLPanelFactory extends ComponentFactoryAbstract {
 					}
 				}
 			}
+			*/
 		}
 		return ApplicationAdvice.DOES_NOT_APPLY;
 	}

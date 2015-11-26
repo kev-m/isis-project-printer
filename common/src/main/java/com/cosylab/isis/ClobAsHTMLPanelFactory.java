@@ -3,19 +3,16 @@
  */
 package com.cosylab.isis;
 
+import org.apache.isis.applib.value.Clob;
 import org.apache.isis.core.metamodel.spec.ObjectSpecification;
 import org.apache.isis.core.metamodel.spec.SpecificationLoader;
-import org.apache.isis.core.runtime.persistence.adapter.PojoAdapter;
 import org.apache.isis.core.runtime.system.context.IsisContext;
-import org.apache.isis.viewer.wicket.model.mementos.PropertyMemento;
-import org.apache.isis.viewer.wicket.model.models.ScalarModel;
 import org.apache.isis.viewer.wicket.model.models.ValueModel;
 import org.apache.isis.viewer.wicket.ui.ComponentFactoryAbstract;
 import org.apache.isis.viewer.wicket.ui.ComponentType;
 import org.apache.wicket.Component;
 import org.apache.wicket.model.IModel;
 
-import com.cosylab.Html;
 import com.cosylab.ReportPrinter;
 
 /**
@@ -43,7 +40,8 @@ public class ClobAsHTMLPanelFactory extends ComponentFactoryAbstract {
 				System.out.println("Here");
 				return ApplicationAdvice.APPLIES_EXCLUSIVELY;
 	        }
-			
+
+	        /* Remove all this
 			Object obj = model.getObject();
 			PropertyMemento pm = ((ScalarModel) model).getPropertyMemento();
 			if (pm != null && pm.getIdentifier().equals("description")){
@@ -60,6 +58,7 @@ public class ClobAsHTMLPanelFactory extends ComponentFactoryAbstract {
 					}
 				}
 			}
+			*/
 		}
 		return ApplicationAdvice.DOES_NOT_APPLY;
 	}
@@ -67,8 +66,8 @@ public class ClobAsHTMLPanelFactory extends ComponentFactoryAbstract {
 
 	@Override
 	public Component createComponent(String id, IModel<?> model) {
-		final ValueModel bookmarkedPagesModel = (ValueModel) model;
-		return new ClobAsPanelModel(id, bookmarkedPagesModel);
+		final ValueModel valueModel = (ValueModel) model;
+		return new ClobAsHtmlModel(id, valueModel);
 	}
 	
 
